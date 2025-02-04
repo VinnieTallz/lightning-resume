@@ -1,3 +1,6 @@
+
+import ScoreResume from "../components/ScoreResume"
+
 export default function Home() {
 
 
@@ -5,6 +8,7 @@ export default function Home() {
 
 
   return (
-    null
-     );
-}
+    <div>
+        <ScoreResume />
+    </div>
+);
