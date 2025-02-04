@@ -33,17 +33,19 @@ export async function POST(req) {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a recruiter for a tech company." },
+        {
+          role: "system",
+          content:
+            "You are a professional resume writer and employment consultant"
+        },
         {
           role: "user",
-          content: `Here is a job description and a resume.  Please evaluate how closely they match and provide a score from 1-100 with 100 being a perfect match. Job Description: ${jobText} Resume: ${resumeText}.  Always format responses to give (score x out of 100) followed by (rationale for the score).` // Use props here
+          content: `Using this job Description: ${jobText} and this candidate's Resume: ${resumeText}  Write a cover letter that is guaranteed to get hired .  Do not add any additional notes or comments.  The user should be able to copy and paste this whole letter.` // Use props here
         }
       ],
       store: true
     });
-    console.log(completion.choices[0].message.content);
-    //   const score = completion.data.choices[0].message?.content;
-    //   return NextResponse.json({ message: 'Success', score: score }); // res.status(200).json({ score: score });
+
     return NextResponse.json({
       status: 200,
       JSON: completion.choices[0].message.content
@@ -51,6 +53,5 @@ export async function POST(req) {
   } catch (error) {
     console.error("API Error:", error); // Log the error for debugging
     return NextResponse.json({ message: "Error", error: error.message });
-    // res.status(500).json({ message: 'Internal Server Error', error: error.message }); // Send error response
   }
 }

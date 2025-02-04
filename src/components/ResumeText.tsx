@@ -15,13 +15,13 @@ function ResumeText({ onTextChange, text }) { // Receive onTextChange and text a
     };
 
     return (
-        <textarea
-            value={resumeText} // Bind to resumeText state
-            onChange={handleTextChange}
-            placeholder="Copy/Paste your resume text here...Or Upload your resume"
-            rows={10}
-            className="w-full border border-gray-300 rounded p-2"
-        />
+<textarea
+    value={resumeText}
+    onChange={handleTextChange}
+    placeholder="Copy/Paste your resume text here...Or Upload your resume"
+    rows={10}
+    className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none shadow-sm text-black"
+/>
     );
 }
 
