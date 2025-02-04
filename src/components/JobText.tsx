@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 
-function JobText({ onTextChange }) { // Added onTextChange prop
+function JobText({ onTextChange }: { onTextChange?: (text: string) => void }) { 
     const [jobText, setJobText] = useState('');
 
-    const handleTextChange = (event) => {
+    const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newText = event.target.value;
         setJobText(newText);
         if (onTextChange) { // Call onTextChange if provided

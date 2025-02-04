@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 
-function ResumeText({ onTextChange, text }) { // Receive onTextChange and text as props
+function ResumeText({ onTextChange, text }: { onTextChange?: (text: string) => void; text?: string }) { // Receive onTextChange and text as props
     const [resumeText, setResumeText] = useState(text || '');  // Initialize with text prop
 
 
-    const handleTextChange = (event) => {
+    const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newText = event.target.value;
         setResumeText(newText);
         if (onTextChange) {
