@@ -44,8 +44,7 @@ export default function ScoreResume() {
         // Handle non-2xx responses (e.g., 400, 500 errors)
         const errorData = response.score; // Get error details if available
         throw new Error(
-          `API request failed: ${response.status} - ${
-            errorData.message || response.statusText
+          `API request failed: 
           }`
         );
       }
