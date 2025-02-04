@@ -1,10 +1,10 @@
 "use client"; // Keep this at the top of the file
 
 import { useState, useEffect } from "react";
-import UploadResume from "./UploadResume"; // Import UploadResume
+//import UploadResume from "./UploadResume"; // Import UploadResume
 import ResumeText from "./ResumeText";
 import JobText from "./JobText";
-import RequestScore from "./RequestScore";
+//import RequestScore from "./RequestScore";
 
 export default function ScoreResume() {
   // Use a named function export
@@ -31,9 +31,8 @@ export default function ScoreResume() {
       alert("Please enter both resume and job text."); // Or a nicer notification
       return;
     }
-
     try {
-      const response = await fetch("/api/GetResumeScore", {
+      const response = fetch("/api/GetResumeScore", {
         // Replace with your API endpoint
         method: "POST",
         headers: {
@@ -41,18 +40,16 @@ export default function ScoreResume() {
         },
         body: JSON.stringify({ resumeText, jobText })
       });
-
       if (!response.ok) {
         // Handle non-2xx responses (e.g., 400, 500 errors)
-        const errorData = await response.json(); // Get error details if available
+        const errorData = response.score; // Get error details if available
         throw new Error(
           `API request failed: ${response.status} - ${
             errorData.message || response.statusText
           }`
         );
       }
-
-      const data = await response.json();
+      const data = response.score;
       console.log("API Response:", data); // Or handle the data as needed
       // Update UI or state based on API response if necessary
       // Consider a loading indicator before and after the request
