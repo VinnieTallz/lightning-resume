@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-export default function RequestScore() {
+export default function RequestScore({ resumeText, jobText }) {
 
     const openai = new OpenAI();
 

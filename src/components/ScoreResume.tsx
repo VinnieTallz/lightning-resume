@@ -41,8 +41,6 @@ export default function ScoreResume() { // Use a named function export
       <button onClick={handleRequestScore} disabled={!resumeText || !jobText}>
                 Request Score
             </button>
-{/* 
-            {showScore && <RequestScore resumeText={resumeText} jobText={jobText} />} Conditionally render */}
 
         </div>
   );
