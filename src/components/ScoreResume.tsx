@@ -1,5 +1,5 @@
 "use client"; // Keep this at the top of the file
-
+import OpenAI from "openai";
 import { useState, useEffect } from 'react';
 import UploadResume from "./UploadResume"; // Import UploadResume
 import ResumeText from "./ResumeText";
@@ -23,8 +23,40 @@ export default function ScoreResume() { // Use a named function export
         setJobText(newText);
     };
 
-    const handleRequestScore = () => {
-        setShowScore(true); // Show RequestScore after button click
+    const handleRequestScore = async () => {
+        if (!resumeText || !jobText) {
+            // Handle case where either text area is empty (e.g., show an alert)
+            alert("Please enter both resume and job text."); // Or a nicer notification
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/GetResumeScore', {  // Replace with your API endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ resumeText, jobText }),
+            });
+
+            if (!response.ok) {
+                // Handle non-2xx responses (e.g., 400, 500 errors)
+                const errorData = await response.json(); // Get error details if available
+                throw new Error(`API request failed: ${response.status} - ${errorData.message || response.statusText}`);
+            }
+
+
+            const data = await response.json();
+            console.log("API Response:", data); // Or handle the data as needed
+            // Update UI or state based on API response if necessary
+            // Consider a loading indicator before and after the request
+
+
+        } catch (error) {
+            console.error("Error requesting score:", error);
+            // Show an error message to the user, etc.
+        }
+
     };
 
     useEffect(() => {
